@@ -1,0 +1,87 @@
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+header {
+  background-color: #444;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+nav a {
+  margin: 0 1em;
+  color: #fff;
+  text-decoration: none;
+}
+
+section {
+  padding: 2em;
+}
+
+.persona-simulator-section button,
+.yuhun-generator-section button {
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  font-weight: bold;
+}
+
+#persona-response {
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 8px;
+  font-style: italic;
+  background-color: #efefef;
+}
+
+.generated-card {
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin: 1em 0;
+  padding: 1em;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.generated-card h3 {
+  margin: 0 0 0.5em 0;
+}
+
+.tools {
+  font-size: 1.2em;
+  margin-top: 0.5em;
+}
+
+.explain {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 0.5em;
+}
+
+footer {
+  background-color: #eee;
+  padding: 1em;
+  text-align: center;
+  font-size: 0.8em;
+  color: #555;
+}
+
+/* 個別風格背景 */
+body.zaeon-bg {
+  background-color: #cfe7ff;
+  color: #003366;
+}
+
+body.co-speech-bg {
+  background-color: #e9ffe9;
+  color: #225522;
+}
+
+body.black-mirror-bg {
+  background-color: #1a1a1a;
+  color: #f2f2f2;
+}
