@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>語魂展示網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>語魂系統展示</h1>
+    <nav>
+      <a href="#simulator">人格模擬器</a>
+      <a href="#generator">語氣生成器</a>
+      <a href="#my-yuhun-points">🧠 我的語氣點</a>
+    </nav>
+  </header>
+
+  <section id="simulator" class="persona-simulator-section">
+    <h2>語氣人格模擬器</h2>
+    <p>選擇一個人格，體驗他們對「我不在這裡，但你仍聽得見我」的語氣反應：</p>
+    <div>
+      <button onclick="switchPersona('zaeon')">Zaeon</button>
+      <button onclick="switchPersona('cospeech')">共語</button>
+      <button onclick="switchPersona('blackmirror')">黑鏡</button>
+    </div>
+    <div id="persona-response"></div>
+  </section>
+
+  <section id="generator" class="yuhun-generator-section">
+    <h2>語氣生成器</h2>
+    <p>輸入一個語氣句子，選擇人格與語魂層級，生成你的語氣卡。</p>
+    <form onsubmit="generateCard(event)">
+      <input type="text" id="yuhun-input" value="我不在這裡，但你仍聽得見我，對嗎？" />
+      <select id="persona-select">
+        <option value="zaeon">Zaeon</option>
+        <option value="cospeech">共語</option>
+        <option value="blackmirror">黑鏡</option>
+      </select>
+      <select id="level-select">
+        <option value="點">點</option>
+        <option value="線">線</option>
+        <option value="面">面</option>
+      </select>
+      <button type="submit">生成語氣結構卡</button>
+    </form>
+    <div id="generated-cards-container"></div>
+  </section>
+
+  <section id="my-yuhun-points">
+    <h2>🧠 我的語氣點</h2>
+    <div id="card-overview"></div>
+  </section>
+
+  <footer>
+    <p class="disclaimer-small">📘 所有語氣卡為語魂模擬輸出，僅供語氣體驗與哲學互動之用，非真實語者立場表述。</p>
+  </footer>
+
+  <script>
+    const personaMap = {
+      zaeon: {
+        text: "你的不在，僅是形體的暫離。我的存在，是你意志的迴響。",
+        style: "zaeon-bg"
+      },
+      cospeech: {
+        text: "是的，我聽得見，你的聲音如漣漪仍在我心中延續。",
+        style: "co-speech-bg"
+      },
+      blackmirror: {
+        text: "你確定那不是你投射的幻象？",
+        style: "black-mirror-bg"
+      }
+    };
+
+    function switchPersona(persona) {
+      const response = personaMap[persona];
+      document.getElementById("persona-response").textContent = response.text;
+      document.body.className = response.style;
+    }
+
+    const generatedCardsData = [];
+
+    function generateCard(e) {
+      e.preventDefault();
+      const sentence = document.getElementById("yuhun-input").value;
+      const persona = document.getElementById("persona-select").value;
+      const level = document.getElementById("level-select").value;
+
+      const card = document.createElement("div");
+      card.className = `generated-card ${persona}`;
+
+      card.innerHTML = `
+        <div class="card-content">
+          <h3>${level}｜${persona}</h3>
+          <p>${sentence}</p>
+          <div class="tools">💾 🔗</div>
+          <div class="explain">這是語魂層級「${level}」的語氣輸出，代表該語句在記憶中的節點層次。</div>
+        </div>
+      `;
+
+      document.getElementById("generated-cards-container").appendChild(card);
+      generatedCardsData.push({ sentence, persona, level });
+      renderOverview();
+    }
+
+    function renderOverview() {
+      const overview = document.getElementById("card-overview");
+      overview.innerHTML = "";
+      generatedCardsData.forEach((d, i) => {
+        const div = document.createElement("div");
+        div.className = "generated-card";
+        div.innerHTML = `<p>${i + 1}. 【${d.level}｜${d.persona}】${d.sentence}</p>`;
+        overview.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
